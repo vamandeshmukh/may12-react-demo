@@ -1,5 +1,5 @@
 
-function App() {
+const App = () => {
   return (
     <div>
       <h1>CG React App</h1>
@@ -10,6 +10,18 @@ function App() {
 export default App;
 
 
+
+// function App() {
+
+//   return (
+//     <div>
+//       <h1>CG React App</h1>
+//       <p>Welcome to Capgemini ReactJS appliation.</p>
+//     </div>
+//   );
+
+// }
+// export default App;
 
 // import logo from './logo.svg';
 // import './App.css';
