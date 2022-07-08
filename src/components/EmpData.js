@@ -21,6 +21,11 @@ const EmpData = () => {
     const sumbitData = (evt) => {
         console.log(evt.target.value);
         setEmpDataToDisplay(emp);
+        setEmp({
+            eid: '',
+            firstName: '',
+            salary: ''
+        });
         evt.preventDefault();
     }
 
@@ -29,8 +34,8 @@ const EmpData = () => {
             <div>
                 <p className="display-4 text-primary">EmpData Component</p>
                 <hr />
-                <div className="row">
-                    <div className="col bg-white mt-3 mb-3 pt-3 pb-3 shadow">
+                <div className="row py-3">
+                    <div className="col-3 md-auto px-3 py-3 bg-white shadow">
                         <p className="lead text-info" >Please enter employee data:</p>
                         <form className="form form-group">
                             <input
@@ -64,22 +69,24 @@ const EmpData = () => {
                             </input>
                             <br />
                             <input
-                                className="form-control btn btn-info"
+                                className="form-control btn btn-primary"
                                 type="button"
                                 value="Submit"
                                 onClick={sumbitData}>
                             </input>
                         </form>
                     </div>
-                    <div className="col bg-white mt-3 mb-3 pt-3 pb-3 px-3 shadow">
-                        <p className="lead text-info">Employee data as being entered:</p>
+                    <div className="col-3 ml-md-auto px-3 py-3 bg-white shadow">
+                        <p className="lead text-info">Employee data as entered:</p>
+                        <hr />
                         <p>Eid: {emp.eid}</p>
                         <p>Name: {emp.firstName}</p>
                         <p>Salary: {emp.salary}</p>
                     </div>
 
-                    <div className="col bg-white mt-3 mb-3 pt-3 pb-3 shadow">
-                        <p className="lead text-info">Employee data after clicking submit:</p>
+                    <div className="col-3 ml-md-auto px-3 py-3 bg-white shadow">
+                        <p className="lead text-info">Employee data after submit:</p>
+                        <hr />
                         <p>Eid: {empDataToDisplay.eid}</p>
                         <p>Name: {empDataToDisplay.firstName}</p>
                         <p>Salary: {empDataToDisplay.salary}</p>
@@ -185,7 +192,7 @@ export default EmpData;
 // export default EmpData;
 
 // =================================
-// upto here 
+// upto here
 // =================================
 
 // import { useState } from "react";

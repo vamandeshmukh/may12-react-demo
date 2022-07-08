@@ -4,7 +4,7 @@ import EmpData from "./components/EmpData";
 const App = () => {
 
   return (
-    <div>
+    <div className="container-fluid">
       <h1>App Component</h1>
       <p>Welcome to Capgemini ReactJS appliation.</p>
       <EmpData />
