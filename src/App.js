@@ -4,7 +4,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>CG React App</h1>
+      <h1>App Component</h1>
       <p>Welcome to Capgemini ReactJS appliation.</p>
       <EmpData />
     </div >
