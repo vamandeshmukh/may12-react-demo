@@ -75,7 +75,7 @@ const EmpData = () => {
                             </input>
                             <br />
                             <input
-                                className="form-control btn btn-primary"
+                                className="form-control btn btn-outline-primary"
                                 type="button"
                                 value="Submit"
                                 onClick={sumbitData}>
