@@ -3,11 +3,21 @@ const EmpData = () => {
 
     let myName = '';
 
+    const handleChange = (evt) => {
+        console.log(evt.target.value);
+        console.log(evt.target.name);
+    }
+
     return (
         <div>
             <h1>EmpData Component</h1>
             <p>Please enter your name:</p>
-            <input type="text" value={myName} ></input>
+            <input
+                type="text"
+                name="myName"
+                value={myName}
+                onChange={handleChange} >
+            </input>
             <p>Welcome {myName}! </p>
         </div>
     );
