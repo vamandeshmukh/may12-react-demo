@@ -1,9 +1,17 @@
 
+// state - one object for one component 
+
+import { useState } from "react";
+
 const EmpData = () => {
 
-    let myName = '';
+    // let myName = '';
+    let [myName, setMyName] = useState('');
 
     const handleChange = (evt) => {
+        // myName = evt.target.value; // this does not work 
+        setMyName(evt.target.value); // this works 
+
         console.log(evt.target.value);
         console.log(evt.target.name);
     }
