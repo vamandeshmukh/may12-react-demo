@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 const EmpData = () => {
 
     let [emp, setEmp] = useState({});
+    let [empDataToDisplay, setEmpDataToDisplay] = useState({});
 
     useEffect(() => {
         setEmp({
@@ -14,49 +15,69 @@ const EmpData = () => {
 
     const handleChange = (evt) => {
         console.log(evt.target.value);
-        // setEmp(...emp[evt.target.name] evt.target.value);
+        setEmp({ ...emp, [evt.target.name]: evt.target.value });
     }
 
     const sumbitData = (evt) => {
         console.log(evt.target.value);
-        // code 
+        setEmpDataToDisplay(emp);
+        evt.preventDefault();
     }
 
     return (
         <div>
-            <h1>EmpData Component</h1>
-            <p>Please enter Employee data:</p>
-            <input
-                // className="text-primary"
-                type="number"
-                id="eid"
-                name="eid"
-                value={emp.eid}
-                placeholder="Enter eid"
-                onChange={handleChange} >
-            </input>
-            <input
-                type="text"
-                id="firstName"
-                name="firstName"
-                value={emp.firstName}
-                placeholder="Enter firstname"
-                onChange={handleChange} >
-            </input>
-            <input
-                type="number"
-                id="salary"
-                name="salary"
-                value={emp.salary}
-                placeholder="Enter salary"
-                onChange={handleChange} >
-            </input>
-            <input
-                type="button"
-                value="Submit"
-                onClick={sumbitData}>
-            </input>
+            <div>
+                <h1>EmpData Component</h1>
+                <p>Please enter Employee data:</p>
+                <input
+                    // className="text-primary"
+                    type="number"
+                    id="eid"
+                    name="eid"
+                    value={emp.eid}
+                    placeholder="Enter eid"
+                    onChange={handleChange} >
+                </input>
+                <br />
+                <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    value={emp.firstName}
+                    placeholder="Enter firstname"
+                    onChange={handleChange} >
+                </input>
+                <br />
+                <input
+                    type="number"
+                    id="salary"
+                    name="salary"
+                    value={emp.salary}
+                    placeholder="Enter salary"
+                    onChange={handleChange} >
+                </input>
+                <br />
+                <input
+                    type="button"
+                    value="Submit"
+                    onClick={sumbitData}>
+                </input>
+            </div>
+            <div>
+                <p>Employee data as being entered:</p>
+                <p>Eid: {emp.eid}</p>
+                <p>Name: {emp.firstName}</p>
+                <p>Salary: {emp.salary}</p>
+            </div>
+            <div>
+                <p>Employee data after clicking submit:</p>
+                <p>Eid: {empDataToDisplay.eid}</p>
+                <p>Name: {empDataToDisplay.firstName}</p>
+                <p>Salary: {empDataToDisplay.salary}</p>
+            </div>
         </div>
+
+
     );
 }
 
