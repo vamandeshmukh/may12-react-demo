@@ -30,7 +30,6 @@ const EmpData = () => {
                 <h1>EmpData Component</h1>
                 <p>Please enter Employee data:</p>
                 <input
-                    // className="text-primary"
                     type="number"
                     id="eid"
                     name="eid"
