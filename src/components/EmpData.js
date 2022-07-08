@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 
 const EmpData = () => {
@@ -16,6 +17,11 @@ const EmpData = () => {
     const handleChange = (evt) => {
         console.log(evt.target.value);
         setEmp({ ...emp, [evt.target.name]: evt.target.value });
+        setEmpDataToDisplay({
+            eid: '',
+            firstName: '',
+            salary: ''
+        });
     }
 
     const sumbitData = (evt) => {
