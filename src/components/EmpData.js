@@ -16,7 +16,7 @@ const EmpData = () => {
 
     const handleChange = (evt) => {
         console.log(evt.target.value);
-        setEmp({ ...emp, [evt.target.name]: evt.target.value });
+        setEmp({ ...emp, [evt.target.name]: evt.target.value }); // imp line 
         setEmpDataToDisplay({
             eid: '',
             firstName: '',
@@ -26,13 +26,13 @@ const EmpData = () => {
 
     const submitData = (evt) => {
         console.log(evt.target.value);
-        setEmpDataToDisplay(emp);
+        setEmpDataToDisplay(emp); // imp line 
         setEmp({
             eid: '',
             firstName: '',
             salary: ''
         });
-        evt.preventDefault();
+        evt.preventDefault(); // find out 
     }
 
     return (
@@ -51,7 +51,8 @@ const EmpData = () => {
                                 name="eid"
                                 value={emp.eid}
                                 placeholder="Enter eid"
-                                onChange={handleChange} >
+                                onChange={handleChange}
+                                autoFocus>
                             </input>
                             <br />
                             <input
@@ -98,12 +99,8 @@ const EmpData = () => {
                         <p>Salary: {empDataToDisplay.salary}</p>
                     </div>
                 </div>
-
-
             </div>
         </div>
-
-
     );
 }
 

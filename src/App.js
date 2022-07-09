@@ -1,13 +1,20 @@
 
 import EmpData from "./components/EmpData";
+import Login from "./components/Login";
 
 const App = () => {
 
   return (
     <div className="container-fluid">
-      <h1>App Component</h1>
-      <p>Welcome to Capgemini ReactJS appliation.</p>
+      <div className="container">
+        <div>
+          <p className="display-4 text-primary">App Component</p>
+          <hr />
+          <p>This is App component.</p>
+        </div>
+      </div>
       <EmpData />
+      <Login />
     </div >
   );
 }
