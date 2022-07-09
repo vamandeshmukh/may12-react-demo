@@ -24,7 +24,7 @@ const EmpData = () => {
         });
     }
 
-    const sumbitData = (evt) => {
+    const submitData = (evt) => {
         console.log(evt.target.value);
         setEmpDataToDisplay(emp);
         setEmp({
@@ -76,9 +76,9 @@ const EmpData = () => {
                             <br />
                             <input
                                 className="form-control btn btn-outline-primary"
-                                type="button"
+                                type="submit"
                                 value="Submit"
-                                onClick={sumbitData}>
+                                onClick={submitData}>
                             </input>
                         </form>
                     </div>
