@@ -3,7 +3,7 @@ import Child from './Child';
 
 const Parent = () => {
 
-    const [parentData, setParentData] = useState(10);
+    const [parentData, setParentData] = useState(25);
 
     return (
         <div className="container-fluid">
@@ -13,7 +13,8 @@ const Parent = () => {
                     <hr />
                     <p>This is Parent component.</p>
                     <p>Parent data in parent component: {parentData}  </p>
-                    <Child />
+                    {/* <Child aatribute={value} /> */}
+                    <Child dataFromParent={parentData} />
                 </div>
             </div>
         </div >
