@@ -1,9 +1,6 @@
 
-import { useState } from "react";
-import EmpData from "./components/EmpData";
-import Login from "./components/Login";
-import Parent from './components/Parent';
 import Routes from "./Routes";
+
 const App = () => {
 
   return (

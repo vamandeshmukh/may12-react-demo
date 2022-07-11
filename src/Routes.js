@@ -1,19 +1,23 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import EmpData from './components/EmpData';
+import Header from './components/Header';
+import Home from './components/Home';
 import Login from './components/Login';
 import Parent from './components/Parent';
+
 
 const Routes = () => {
 
     return (
-        <div className="container-fluid">
-            <p>Routes Component</p>
+        <div>
             <div>
                 <BrowserRouter>
+                    <Header />
                     <Switch>
                         <Route path='/login'> <Login />  </Route>
-                        <Route path='/empdata'> <EmpData />  </Route>
+                        <Route path='/emp'> <EmpData />  </Route>
                         <Route path='/parent'> <Parent />  </Route>
+                        <Route path='/'> <Home />  </Route>
                     </Switch>
                 </BrowserRouter>
             </div>
