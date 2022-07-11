@@ -6,6 +6,11 @@ const Child = (props) => {
     const [childData, setChildData] = useState(20);
     const parentDataInChild = props.dataFromParent;
 
+    const sendDataToParent = () => {
+        console.log('data sent from child to parent');
+        props.dataFromChild(childData);
+    }
+
     return (
         <div className="container-fluid">
             <div className="container">
@@ -15,6 +20,7 @@ const Child = (props) => {
                     <p>This is Child component.</p>
                     <p>Child data in child component: {childData}  </p>
                     <p>Parent data in child component: {parentDataInChild}  </p>
+                    <button onClick={sendDataToParent} >Send Data from Child to Parent</button>
                 </div>
             </div>
         </div >
