@@ -1,7 +1,8 @@
 
+import { useState } from "react";
 import EmpData from "./components/EmpData";
 import Login from "./components/Login";
-
+import Parent from './components/Parent';
 const App = () => {
 
   return (
@@ -13,8 +14,9 @@ const App = () => {
           <p>This is App component.</p>
         </div>
       </div>
-      <EmpData />
-      <Login />
+      <Parent />
+      {/* <EmpData />
+      <Login /> */}
     </div >
   );
 }

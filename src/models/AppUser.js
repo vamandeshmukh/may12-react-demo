@@ -4,4 +4,5 @@ class AppUser {
     password;
     role;
 }
+
 export default AppUser;
