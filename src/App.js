@@ -3,20 +3,12 @@ import { useState } from "react";
 import EmpData from "./components/EmpData";
 import Login from "./components/Login";
 import Parent from './components/Parent';
+import Routes from "./Routes";
 const App = () => {
 
   return (
     <div className="container-fluid">
-      <div className="container">
-        <div>
-          <p className="display-4 text-primary">App Component</p>
-          <hr />
-          <p>This is App component.</p>
-        </div>
-      </div>
-      <Parent />
-      {/* <EmpData />
-      <Login /> */}
+      <Routes />
     </div >
   );
 }
