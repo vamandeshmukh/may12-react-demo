@@ -20,7 +20,7 @@ const Child = (props) => {
                     <p>This is Child component.</p>
                     <p>Child data in child component: {childData}  </p>
                     <p>Parent data in child component: {parentDataInChild}  </p>
-                    <button onClick={sendDataToParent} >Send Data from Child to Parent</button>
+                    <button className="btn btn-outline-primary" onClick={sendDataToParent} >Send Data from Child to Parent</button>
                 </div>
             </div>
         </div >

@@ -16,6 +16,7 @@ const Header = () => {
                         <div className=" navbar-nav ml-auto">
                             <Link className="nav-link" to='/emp'>Emp</Link>
                             <Link className="nav-link" to='/parent'>Parent</Link>
+                            <Link className="nav-link" to='/register'>Register</Link>
                             <Link className="nav-link" to='/login'>Login</Link>
                         </div>
                     </div>

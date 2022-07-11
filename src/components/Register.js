@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AppUser from '../models/AppUser';
 
-const Login = () => {
+const Register = () => {
 
     const [appUser, setAppUser] = useState(new AppUser());
 
@@ -16,25 +16,19 @@ const Login = () => {
         });
     };
 
-    const submitAppUser = (event) => {
-        if (appUser.userName === "Sonu" && appUser.password === "Sonu") {
-            alert(`Login for ${appUser.userName} is successful!`);
-            setAppUser({ userName: '', password: '', role: '' });
-        }
-        else {
-            alert(`Login failed for ${appUser.userName}!`);
-            setAppUser({ userName: '', password: '', role: '' });
-        }
+    const submitRegister = (event) => {
+        alert(`Register for ${appUser.userName} is successful!`);
+        setAppUser('');
         event.preventDefault();
     }
 
     return (
         <div className="container" >
-            <p className="display-4 text-primary py-3">Login Component</p>
+            <p className="display-4 text-primary py-3">Register Component</p>
             <hr />
             <div className="col-3 mt-3 py-3 shadow bg-white" >
-                <h1 className="lead text-primary pb-2">Login</h1>
-                <form className="form form-group form-dark " onSubmit={submitAppUser}>
+                <h1 className="lead text-primary pb-3">Register</h1>
+                <form className="form form-group form-dark " onSubmit={submitRegister}>
                     <div>
                         <input
                             type="text"
@@ -69,18 +63,19 @@ const Login = () => {
                             id="submit"
                             name="submit"
                             className="form-control btn btn-outline-primary mb-3"
-                            value="Login"
-                            onClick={submitAppUser}
+                            value="Register"
+                            onClick={submitRegister}
                         />
                     </div>
                 </form>
             </div>
             <div className="py-3 ">
-                <Link to="/register" className="btn btn-outline-primary col-3">Not yet registered? Register</Link>
+                <Link to="/login" className="btn btn-outline-primary col-3">Already registered? Login</Link>
             </div>
+
         </div >
     )
 }
-export default Login;
+export default Register;
 
 
