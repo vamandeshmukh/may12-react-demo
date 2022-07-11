@@ -16,12 +16,7 @@ const Routes = () => {
                         <Route path='/parent'> <Parent />  </Route>
                     </Switch>
                 </BrowserRouter>
-
-
             </div>
-
-
-
         </div >
     );
 }
