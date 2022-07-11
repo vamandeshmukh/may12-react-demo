@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const Child = (props) => {
 
     // const [parentDataInChild, setParentDataInChild] = ???; // get data from Parent component 
-    let [childData, setChildData] = useState(new Date().getMilliseconds());
+    const [childData, setChildData] = useState(new Date().toDateString());
     const parentDataInChild = props.dataFromParent;
 
     const sendDataToParent = () => {
