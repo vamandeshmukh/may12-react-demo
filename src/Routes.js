@@ -5,7 +5,6 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Parent from './components/Parent';
 
-
 const Routes = () => {
 
     return (
@@ -13,12 +12,14 @@ const Routes = () => {
             <div>
                 <BrowserRouter>
                     <Header />
-                    <Switch>
-                        <Route path='/login'> <Login />  </Route>
-                        <Route path='/emp'> <EmpData />  </Route>
-                        <Route path='/parent'> <Parent />  </Route>
-                        <Route path='/'> <Home />  </Route>
-                    </Switch>
+                    <div>
+                        <Switch>
+                            <Route path='/login'> <Login />  </Route>
+                            <Route path='/emp'> <EmpData />  </Route>
+                            <Route path='/parent'> <Parent />  </Route>
+                            <Route path='/'> <Home />  </Route>
+                        </Switch>
+                    </div>
                 </BrowserRouter>
             </div>
         </div >

@@ -2,9 +2,8 @@ const Home = () => {
 
     return (
         <div>
-            <p>Home component</p>
+            <p className="display-4 text-primary py-3">Home component</p>
             <div>
-
             </div>
         </div >
     );

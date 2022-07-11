@@ -4,7 +4,7 @@ import Routes from "./Routes";
 const App = () => {
 
   return (
-    <div className="container-fluid">
+    <div>
       <Routes />
     </div >
   );
