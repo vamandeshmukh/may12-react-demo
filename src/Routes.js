@@ -3,6 +3,7 @@ import EmpData from './components/EmpData';
 import Header from './components/Header';
 import Home from './components/Home';
 import Login from './components/Login';
+import Logout from './components/Logout';
 import Parent from './components/Parent';
 import Register from './components/Register';
 
@@ -17,6 +18,7 @@ const Routes = () => {
                         <Switch>
                             <Route path='/emp'> <EmpData />  </Route>
                             <Route path='/login'> <Login />  </Route>
+                            <Route path='/logout'> <Logout />  </Route>
                             <Route path='/parent'> <Parent />  </Route>
                             <Route path='/register'> <Register />  </Route>
                             <Route path='/'> <Home />  </Route>

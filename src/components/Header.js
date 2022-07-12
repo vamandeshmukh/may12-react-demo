@@ -18,6 +18,7 @@ const Header = () => {
                             <Link className="nav-link" to='/parent'>Parent</Link>
                             <Link className="nav-link" to='/register'>Register</Link>
                             <Link className="nav-link" to='/login'>Login</Link>
+                            <Link className="nav-link" to='/logout'>Logout</Link>
                         </div>
                     </div>
                 </nav>
