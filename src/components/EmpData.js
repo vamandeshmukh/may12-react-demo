@@ -23,10 +23,23 @@ const EmpData = () => {
         setEid(evt.target.value);
     }
 
+    const handleAddEmp = (e) => {
+        console.log(e.target.name);
+        console.log(e.target.value);
+        setEmpToBeAdded({
+            ...empToBeAdded,
+            [e.target.name]: e.target.value
+        });
+
+        setDepartment({
+            ...department,
+            [e.target.name]: e.target.value
+        });
+    }
+
     const submitGetEmpById = (evt) => {
         console.log(eid);
         evt.preventDefault();
-        // axios.get(`http://localhost:8088/emp/get-employee-by-id/${eid}`)
         getEmpByIdService(eid)
             .then((response) => {
                 console.log(response.data);
@@ -52,20 +65,6 @@ const EmpData = () => {
             });
     }
 
-    const handleAddEmp = (e) => {
-        console.log(e.target.name);
-        console.log(e.target.value);
-        setEmpToBeAdded({
-            ...empToBeAdded,
-            [e.target.name]: e.target.value
-        });
-
-        setDepartment({
-            ...department,
-            [e.target.name]: e.target.value
-        });
-    }
-
     const submitAddEmp = (evt) => {
         evt.preventDefault();
         let empTemp = { ...empToBeAdded, department };
@@ -83,7 +82,8 @@ const EmpData = () => {
 
     return (
         <div className="container">
-            <p className="display-4 text-primary">EmpData Component</p>
+            <p className="display-4 text-primary py-3">EmpData</p>
+            <hr />
             <div className="bg-white shadow shadow-regular mb-3 mt-3 px-3 py-3 pb-3 pt-3 col-4">
                 <p className="lead">Add New Employee</p>
                 <div className="form form-group" >
@@ -105,10 +105,10 @@ const EmpData = () => {
                         placeholder="Enter salary" />
                     <input
                         type="number"
-                        id="departmentId"
-                        name="departmentId"
+                        id="did"
+                        name="did"
                         className="form-control mb-3 mt-3"
-                        value={department.departmentId}
+                        value={department.did}
                         onChange={handleAddEmp}
                         placeholder="Enter Department Id" />
                     <input
@@ -134,19 +134,17 @@ const EmpData = () => {
                         <input type="submit" className="form-control mb-3 mt-3 btn btn-outline-primary" value="Get Employee" onClick={submitGetEmpById} />
                     </form>
                 </div>
+                {/* this needs explanation  */}
                 <div> {(emp.eid) &&
                     <div>
                         <p className="lead text-primary">Employee Details</p>
                         <p> Employee id: {emp.eid} </p>
                         <p> First name: {emp.firstName} </p>
                         <p> Salary: {emp.salary} </p>
-                        {/* <p> Department id: {emp.department.did} </p>
-                        <p> Department name: {emp.department.departmentName} </p>
-                        <p> City: {emp.department.city} </p> */}
-
+                        {/* this needs explanation  */}
                         {(emp.department) &&
                             <div>
-                                <p> Department id: {emp.department.departmentId} </p>
+                                <p> Department id: {emp.department.did} </p>
                                 <p> Department name: {emp.department.departmentName} </p>
                                 <p> City: {emp.department.city}  </p>
                             </div>
@@ -166,6 +164,7 @@ const EmpData = () => {
                     />
                 </div>
                 <div>
+                    {/* this needs explanation  */}
                     <div> {(allEmps) &&
                         <div>
                             <p className="text-primary text-center font-weight-bold lead">List of All Employees</p>
@@ -189,7 +188,7 @@ const EmpData = () => {
                                                 <td>{e.salary}</td>
                                                 {(e.department) &&
                                                     <>
-                                                        <td>{e.department.departmentId}</td>
+                                                        <td>{e.department.did}</td>
                                                         <td>{e.department.departmentName}</td>
                                                         <td>{e.department.city}</td>
                                                     </>
