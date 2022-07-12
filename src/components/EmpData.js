@@ -1,81 +1,295 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import Department from "../models/Department";
+import Employee from "../models/Employee";
+import { getEmpByIdService, getAllEmpsService, addEmpService } from "../services/EmployeeService";
 
 const EmpData = () => {
 
-    let [eid, setEid] = useState('');
-    let [empDataToDisplay, setEmpDataToDisplay] = useState({});
+    const [eid, setEid] = useState('');
+    const [emp, setEmp] = useState(new Employee());
+    const [empToBeAdded, setEmpToBeAdded] = useState(new Employee());
+    const [department, setDepartment] = useState(new Department());
+    const [allEmps, setAllEmps] = useState();
+
+    useEffect(
+        () => {
+
+        }
+        , []);
 
     const handleChange = (evt) => {
+        console.log(evt.target.name);
+        console.log(evt.target.value);
         setEid(evt.target.value);
-        setEmpDataToDisplay({
-            eid: '',
-            firstName: '',
-            salary: ''
+    }
+
+    const submitGetEmpById = (evt) => {
+        console.log(eid);
+        evt.preventDefault();
+        // axios.get(`http://localhost:8088/emp/get-employee-by-id/${eid}`)
+        getEmpByIdService(eid)
+            .then((response) => {
+                console.log(response.data);
+                setEmp(response.data);
+            })
+            .catch((error) => {
+                alert(error);
+                setEmp(new Employee());
+            })
+    }
+
+    const submitGetAllEmps = (evt) => {
+        evt.preventDefault();
+        getAllEmpsService()
+            .then((response) => {
+                setAllEmps(response.data);
+                console.log(response.data);
+                console.log(allEmps);
+            })
+            .catch((error) => {
+                alert(error);
+                setAllEmps([]);
+            });
+    }
+
+    const handleAddEmp = (e) => {
+        console.log(e.target.name);
+        console.log(e.target.value);
+        setEmpToBeAdded({
+            ...empToBeAdded,
+            [e.target.name]: e.target.value
+        });
+
+        setDepartment({
+            ...department,
+            [e.target.name]: e.target.value
         });
     }
 
-    const getEmpById = (evt) => {
-        console.log(eid);
-        axios.get(`http://localhost:9999/emp/get-emp-by-id/${eid}`)
+    const submitAddEmp = (evt) => {
+        evt.preventDefault();
+        let empTemp = { ...empToBeAdded, department };
+        addEmpService(empTemp)
             .then((response) => {
-                setEmpDataToDisplay(response.data);
-                setEid('');
+                console.log(response.data);
+                alert(`Employee with eid ${response.data.eid} added successfully.`);
             })
             .catch(() => {
-                alert(`Employee with eid ${eid} not found!`);
-                setEid('');
-                setEmpDataToDisplay({
-                    eid: '',
-                    firstName: '',
-                    salary: ''
-                });
+                setEmpToBeAdded(new Employee());
+                empTemp = '';
+                alert("Employee could not be added.");
             });
-        evt.preventDefault();
     }
 
     return (
         <div className="container">
-            <div>
-                <p className="display-4 text-primary py-3">EmpData</p>
-                <hr />
-                <div className="row pt-3">
-                    <div className="col-3 md-auto px-3 pt-3 bg-white shadow">
-                        <p className="lead text-info">Search employee:</p>
-                        <form className="form form-group">
-                            <input
-                                className="form-control mb-3"
-                                type="number"
-                                id="eid"
-                                name="eid"
-                                value={eid}
-                                placeholder="Enter eid"
-                                onChange={handleChange}
-                                autoFocus
-                            >
-                            </input>
-                            <input
-                                className="form-control btn btn-outline-primary"
-                                type="submit"
-                                value="Search employee"
-                                onClick={getEmpById}>
-                            </input>
-                        </form>
+            <p className="display-4 text-primary">EmpData Component</p>
+            <div className="bg-white shadow shadow-regular mb-3 mt-3 px-3 py-3 pb-3 pt-3 col-4">
+                <p className="lead">Add New Employee</p>
+                <div className="form form-group" >
+                    <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        className="form-control mb-3 mt-3"
+                        value={empToBeAdded.firstName}
+                        onChange={handleAddEmp}
+                        placeholder="Enter First Name" />
+                    <input
+                        type="number"
+                        id="salary"
+                        name="salary"
+                        className="form-control mb-3 mt-3"
+                        value={empToBeAdded.salary}
+                        onChange={handleAddEmp}
+                        placeholder="Enter salary" />
+                    <input
+                        type="number"
+                        id="departmentId"
+                        name="departmentId"
+                        className="form-control mb-3 mt-3"
+                        value={department.departmentId}
+                        onChange={handleAddEmp}
+                        placeholder="Enter Department Id" />
+                    <input
+                        type="submit"
+                        className="btn btn-outline-primary form-control mb-3 mt-3"
+                        value="Add Employee"
+                        onClick={submitAddEmp}
+                    />
+                </div>
+            </div>
+            <div className="bg-white shadow shadow-regular mb-3 mt-3 px-3 py-3 pb-3 pt-3 col-4">
+                <p className="lead">Find an Employee</p>
+                <div>
+                    <form className="form form-group">
+                        <input
+                            type="number"
+                            className="form-control mb-3 mt-3"
+                            id="eid"
+                            value={eid}
+                            placeholder="Enter employee id"
+                            onChange={handleChange}
+                            autoFocus />
+                        <input type="submit" className="form-control mb-3 mt-3 btn btn-outline-primary" value="Get Employee" onClick={submitGetEmpById} />
+                    </form>
+                </div>
+                <div> {(emp.eid) &&
+                    <div>
+                        <p className="lead text-primary">Employee Details</p>
+                        <p> Employee id: {emp.eid} </p>
+                        <p> First name: {emp.firstName} </p>
+                        <p> Salary: {emp.salary} </p>
+                        {/* <p> Department id: {emp.department.did} </p>
+                        <p> Department name: {emp.department.departmentName} </p>
+                        <p> City: {emp.department.city} </p> */}
+
+                        {(emp.department) &&
+                            <div>
+                                <p> Department id: {emp.department.departmentId} </p>
+                                <p> Department name: {emp.department.departmentName} </p>
+                                <p> City: {emp.department.city}  </p>
+                            </div>
+                        }
                     </div>
-                    <div className="col-4 ml-auto mr-auto px-3 py-3 bg-white shadow">
-                        <p className="lead text-info">Employee data after submit:</p>
-                        <hr />
-                        <p>Eid: {empDataToDisplay.eid}</p>
-                        <p>Name: {empDataToDisplay.firstName}</p>
-                        <p>Salary: {empDataToDisplay.salary}</p>
+                }
+                </div>
+            </div>
+            <div className="bg-white shadow shadow-regular mb-3 mt-3 px-3 py-3 pb-3 pt-3 col-8">
+                <p className="lead">Get All Employees</p>
+                <div className="form form-group" >
+                    <input
+                        type="button"
+                        className="btn btn-outline-primary form-control mb-3 mt-3"
+                        value="Get All Employees"
+                        onClick={submitGetAllEmps}
+                    />
+                </div>
+                <div>
+                    <div> {(allEmps) &&
+                        <div>
+                            <p className="text-primary text-center font-weight-bold lead">List of All Employees</p>
+                            {
+                                <table className="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Emp Id</th>
+                                            <th>First Name</th>
+                                            <th>Salary</th>
+                                            <th>Dept Id</th>
+                                            <th>Dept Name</th>
+                                            <th>City</th>
+                                        </tr>
+                                    </thead>
+                                    {allEmps.map((e =>
+                                        <tbody>
+                                            <tr>
+                                                <td>{e.eid}</td>
+                                                <td>{e.firstName}</td>
+                                                <td>{e.salary}</td>
+                                                {(e.department) &&
+                                                    <>
+                                                        <td>{e.department.departmentId}</td>
+                                                        <td>{e.department.departmentName}</td>
+                                                        <td>{e.department.city}</td>
+                                                    </>
+                                                }
+                                            </tr>
+                                        </tbody>
+                                    ))}
+                                </table>
+                            }
+                        </div>
+                    }
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }
 
 export default EmpData;
+
+
+
+// import axios from "axios";
+// import { useEffect, useState } from "react";
+
+// const EmpData = () => {
+
+//     let [eid, setEid] = useState('');
+//     let [empDataToDisplay, setEmpDataToDisplay] = useState({});
+
+//     const handleChange = (evt) => {
+//         setEid(evt.target.value);
+//         setEmpDataToDisplay({
+//             eid: '',
+//             firstName: '',
+//             salary: ''
+//         });
+//     }
+
+//     const getEmpById = (evt) => {
+//         console.log(eid);
+//         axios.get(`http://localhost:9999/emp/get-emp-by-id/${eid}`)
+//             .then((response) => {
+//                 setEmpDataToDisplay(response.data);
+//                 setEid('');
+//             })
+//             .catch(() => {
+//                 alert(`Employee with eid ${eid} not found!`);
+//                 setEid('');
+//                 setEmpDataToDisplay({
+//                     eid: '',
+//                     firstName: '',
+//                     salary: ''
+//                 });
+//             });
+//         evt.preventDefault();
+//     }
+
+//     return (
+//         <div className="container">
+//             <div>
+//                 <p className="display-4 text-primary py-3">EmpData</p>
+//                 <hr />
+//                 <p className="lead">Search Employee by Id</p>
+//                 <div className="row pt-3">
+//                     <div className="col-3 md-auto px-3 pt-3 bg-white shadow">
+//                         <p className="lead text-info">Search employee:</p>
+//                         <form className="form form-group">
+//                             <input
+//                                 className="form-control mb-3"
+//                                 type="number"
+//                                 id="eid"
+//                                 name="eid"
+//                                 value={eid}
+//                                 placeholder="Enter eid"
+//                                 onChange={handleChange}
+//                                 autoFocus>
+//                             </input>
+//                             <input
+//                                 className="form-control btn btn-outline-primary"
+//                                 type="submit"
+//                                 value="Search employee"
+//                                 onClick={getEmpById}>
+//                             </input>
+//                         </form>
+//                     </div>
+//                     <div className="col-4 ml-auto mr-auto px-3 py-3 bg-white shadow">
+//                         <p className="lead text-info">Employee details:</p>
+//                         <hr />
+//                         <p>Eid: {empDataToDisplay.eid}</p>
+//                         <p>Name: {empDataToDisplay.firstName}</p>
+//                         <p>Salary: {empDataToDisplay.salary}</p>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// }
+
+// export default EmpData;
 
 
 // import { useEffect, useState } from "react";
