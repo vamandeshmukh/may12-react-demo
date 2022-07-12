@@ -34,7 +34,7 @@ const Login = () => {
 
     return (
         <div className="container" >
-            <p className="display-4 text-primary py-3">Login Component</p>
+            <p className="display-4 text-primary py-3">Login</p>
             <hr />
             <div className="col-3 mt-3 py-3 shadow bg-white" >
                 <h1 className="lead text-primary pb-2">Login</h1>
@@ -72,7 +72,7 @@ const Login = () => {
                             type="submit"
                             id="submit"
                             name="submit"
-                            className="form-control btn btn-outline-primary mb-3"
+                            className="form-control btn btn-outline-primary"
                             value="Login"
                             onClick={submitAppUser}
                         />

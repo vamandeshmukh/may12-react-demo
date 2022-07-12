@@ -38,7 +38,7 @@ const EmpData = () => {
     return (
         <div className="container">
             <div>
-                <p className="display-4 text-primary py-3">EmpData Component</p>
+                <p className="display-4 text-primary py-3">EmpData</p>
                 <hr />
                 <div className="row py-3">
                     <div className="col-3 md-auto px-3 py-3 bg-white shadow">

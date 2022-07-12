@@ -15,7 +15,7 @@ const Child = (props) => {
         <div className="container-fluid">
             <div className="container">
                 <div>
-                    <p className="display-4 text-primary">Child Component</p>
+                    <p className="display-4 text-primary">Child</p>
                     <hr />
                     <p>This is Child component.</p>
                     <p>Child data in child component: {childData}  </p>

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -17,17 +18,23 @@ const Register = () => {
     };
 
     const submitRegister = (event) => {
-        alert(`Register for ${appUser.userName} is successful!`);
-        setAppUser('');
+        console.log(appUser);
+        axios.post('http://localhost:9999/user/register', appUser)
+            .then((response) => {
+                alert(`Registration successful for ${response.data.userName}!`);
+            })
+            .catch((error) => {
+                alert(`Something is wrong ${error.message}!`);
+            });
         event.preventDefault();
     }
 
     return (
         <div className="container" >
-            <p className="display-4 text-primary py-3">Register Component</p>
+            <p className="display-4 text-primary py-3">Register</p>
             <hr />
             <div className="col-3 mt-3 py-3 shadow bg-white" >
-                <h1 className="lead text-primary pb-3">Register</h1>
+                <h1 className="lead text-primary pb-2">Register</h1>
                 <form className="form form-group form-dark " onSubmit={submitRegister}>
                     <div>
                         <input
@@ -62,7 +69,7 @@ const Register = () => {
                             type="submit"
                             id="submit"
                             name="submit"
-                            className="form-control btn btn-outline-primary mb-3"
+                            className="form-control btn btn-outline-primary"
                             value="Register"
                             onClick={submitRegister}
                         />

@@ -16,7 +16,7 @@ const Parent = () => {
         <div className="container-fluid">
             <div className="container">
                 <div>
-                    <p className="display-4 text-primary py-3">Parent Component</p>
+                    <p className="display-4 text-primary py-3">Parent</p>
                     <hr />
                     <p>This is Parent component.</p>
                     <p>Parent data in parent component: {parentData}  </p>
