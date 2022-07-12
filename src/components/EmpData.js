@@ -1,22 +1,13 @@
-
+import axios from "axios";
 import { useEffect, useState } from "react";
 
 const EmpData = () => {
 
-    let [emp, setEmp] = useState({});
+    let [eid, setEid] = useState('');
     let [empDataToDisplay, setEmpDataToDisplay] = useState({});
 
-    useEffect(() => {
-        setEmp({
-            eid: '',
-            firstName: '',
-            salary: ''
-        });
-    }, []);
-
     const handleChange = (evt) => {
-        console.log(evt.target.value);
-        setEmp({ ...emp, [evt.target.name]: evt.target.value }); // imp line 
+        setEid(evt.target.value);
         setEmpDataToDisplay({
             eid: '',
             firstName: '',
@@ -24,15 +15,23 @@ const EmpData = () => {
         });
     }
 
-    const submitData = (evt) => {
-        console.log(evt.target.value);
-        setEmpDataToDisplay(emp); // imp line 
-        setEmp({
-            eid: '',
-            firstName: '',
-            salary: ''
-        });
-        evt.preventDefault(); // find out 
+    const getEmpById = (evt) => {
+        console.log(eid);
+        axios.get(`http://localhost:9999/emp/get-emp-by-id/${eid}`)
+            .then((response) => {
+                setEmpDataToDisplay(response.data);
+                setEid('');
+            })
+            .catch(() => {
+                alert(`Employee with eid ${eid} not found!`);
+                setEid('');
+                setEmpDataToDisplay({
+                    eid: '',
+                    firstName: '',
+                    salary: ''
+                });
+            });
+        evt.preventDefault();
     }
 
     return (
@@ -40,58 +39,30 @@ const EmpData = () => {
             <div>
                 <p className="display-4 text-primary py-3">EmpData</p>
                 <hr />
-                <div className="row py-3">
-                    <div className="col-3 md-auto px-3 py-3 bg-white shadow">
-                        <p className="lead text-info" >Please enter employee data:</p>
+                <div className="row pt-3">
+                    <div className="col-3 md-auto px-3 pt-3 bg-white shadow">
+                        <p className="lead text-info">Search employee:</p>
                         <form className="form form-group">
                             <input
-                                className="form-control"
+                                className="form-control mb-3"
                                 type="number"
                                 id="eid"
                                 name="eid"
-                                value={emp.eid}
+                                value={eid}
                                 placeholder="Enter eid"
                                 onChange={handleChange}
-                                autoFocus>
+                                autoFocus
+                            >
                             </input>
-                            <br />
-                            <input
-                                className="form-control"
-                                type="text"
-                                id="firstName"
-                                name="firstName"
-                                value={emp.firstName}
-                                placeholder="Enter firstname"
-                                onChange={handleChange} >
-                            </input>
-                            <br />
-                            <input
-                                className="form-control"
-                                type="number"
-                                id="salary"
-                                name="salary"
-                                value={emp.salary}
-                                placeholder="Enter salary"
-                                onChange={handleChange} >
-                            </input>
-                            <br />
                             <input
                                 className="form-control btn btn-outline-primary"
                                 type="submit"
-                                value="Submit"
-                                onClick={submitData}>
+                                value="Search employee"
+                                onClick={getEmpById}>
                             </input>
                         </form>
                     </div>
-                    <div className="col-3 ml-md-auto px-3 py-3 bg-white shadow">
-                        <p className="lead text-info">Employee data as entered:</p>
-                        <hr />
-                        <p>Eid: {emp.eid}</p>
-                        <p>Name: {emp.firstName}</p>
-                        <p>Salary: {emp.salary}</p>
-                    </div>
-
-                    <div className="col-3 ml-md-auto px-3 py-3 bg-white shadow">
+                    <div className="col-4 ml-auto mr-auto px-3 py-3 bg-white shadow">
                         <p className="lead text-info">Employee data after submit:</p>
                         <hr />
                         <p>Eid: {empDataToDisplay.eid}</p>
@@ -105,6 +76,114 @@ const EmpData = () => {
 }
 
 export default EmpData;
+
+
+// import { useEffect, useState } from "react";
+
+// const EmpData = () => {
+
+//     let [emp, setEmp] = useState({});
+//     let [empDataToDisplay, setEmpDataToDisplay] = useState({});
+
+//     useEffect(() => {
+//         setEmp({
+//             eid: '',
+//             firstName: '',
+//             salary: ''
+//         });
+//     }, []);
+
+//     const handleChange = (evt) => {
+//         console.log(evt.target.value);
+//         setEmp({ ...emp, [evt.target.name]: evt.target.value }); // imp line
+//         setEmpDataToDisplay({
+//             eid: '',
+//             firstName: '',
+//             salary: ''
+//         });
+//     }
+
+//     const submitData = (evt) => {
+//         console.log(evt.target.value);
+//         setEmpDataToDisplay(emp); // imp line
+//         setEmp({
+//             eid: '',
+//             firstName: '',
+//             salary: ''
+//         });
+//         evt.preventDefault(); // find out
+//     }
+
+//     return (
+//         <div className="container">
+//             <div>
+//                 <p className="display-4 text-primary py-3">EmpData</p>
+//                 <hr />
+//                 <div className="row py-3">
+//                     <div className="col-3 md-auto px-3 py-3 bg-white shadow">
+//                         <p className="lead text-info" >Please enter employee data:</p>
+//                         <form className="form form-group">
+//                             <input
+//                                 className="form-control"
+//                                 type="number"
+//                                 id="eid"
+//                                 name="eid"
+//                                 value={emp.eid}
+//                                 placeholder="Enter eid"
+//                                 onChange={handleChange}
+//                                 autoFocus>
+//                             </input>
+//                             <br />
+//                             <input
+//                                 className="form-control"
+//                                 type="text"
+//                                 id="firstName"
+//                                 name="firstName"
+//                                 value={emp.firstName}
+//                                 placeholder="Enter firstname"
+//                                 onChange={handleChange} >
+//                             </input>
+//                             <br />
+//                             <input
+//                                 className="form-control"
+//                                 type="number"
+//                                 id="salary"
+//                                 name="salary"
+//                                 value={emp.salary}
+//                                 placeholder="Enter salary"
+//                                 onChange={handleChange} >
+//                             </input>
+//                             <br />
+//                             <input
+//                                 className="form-control btn btn-outline-primary"
+//                                 type="submit"
+//                                 value="Submit"
+//                                 onClick={submitData}>
+//                             </input>
+//                         </form>
+//                     </div>
+//                     <div className="col-4 ml-md-auto px-3 py-3 bg-white shadow">
+//                         <p className="lead text-info">Employee data as entered:</p>
+//                         <hr />
+//                         <p>Eid: {emp.eid}</p>
+//                         <p>Name: {emp.firstName}</p>
+//                         <p>Salary: {emp.salary}</p>
+//                     </div>
+
+//                     <div className="col-4 ml-md-auto px-3 py-3 bg-white shadow">
+//                         <p className="lead text-info">Employee data after submit:</p>
+//                         <hr />
+//                         <p>Eid: {empDataToDisplay.eid}</p>
+//                         <p>Name: {empDataToDisplay.firstName}</p>
+//                         <p>Salary: {empDataToDisplay.salary}</p>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// }
+
+// export default EmpData;
 
 // =================================
 // try this code (without bootstrap)
