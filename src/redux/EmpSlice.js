@@ -6,7 +6,8 @@ const EmpSlice = createSlice({
     name: 'emp',
 
     initialState: {
-        empObj: new Employee(),
+        // empObj: new Employee(),
+        empObj: { eid: 98765, firstName: 'Zxywv', salary: 9876543 },
         empList: []
     },
 
@@ -21,8 +22,7 @@ const EmpSlice = createSlice({
             console.log(action.payload);
             state.empList = action.payload;
         }
-
-        // more functions for this component state 
+        // create more functions here  
     }
 });
 
