@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import Department from "../models/Department";
 import Employee from "../models/Employee";
 import { getEmpByIdService, getAllEmpsService, addEmpService } from "../services/EmployeeService";
@@ -10,6 +11,8 @@ const EmpData = () => {
     const [empToBeAdded, setEmpToBeAdded] = useState(new Employee());
     const [department, setDepartment] = useState(new Department());
     const [allEmps, setAllEmps] = useState();
+
+    const empDataFromStore = useSelector((state) => { return state.emp.empObj });
 
     useEffect(
         () => {
@@ -152,6 +155,10 @@ const EmpData = () => {
                     </div>
                 }
                 </div>
+                <div>
+                    <p>emp Data From Store</p>
+                    <p>{empDataFromStore.eid} {empDataFromStore.firstName} {empDataFromStore.salary} </p>
+                </div>
             </div>
             <div className="bg-white shadow shadow-regular mb-3 mt-3 px-3 py-3 pb-3 pt-3 col-8">
                 <p className="lead">Get All Employees</p>
@@ -208,6 +215,218 @@ const EmpData = () => {
 }
 
 export default EmpData;
+
+
+// import { useState, useEffect } from "react";
+// import Department from "../models/Department";
+// import Employee from "../models/Employee";
+// import { getEmpByIdService, getAllEmpsService, addEmpService } from "../services/EmployeeService";
+
+// const EmpData = () => {
+
+//     const [eid, setEid] = useState('');
+//     const [emp, setEmp] = useState(new Employee());
+//     const [empToBeAdded, setEmpToBeAdded] = useState(new Employee());
+//     const [department, setDepartment] = useState(new Department());
+//     const [allEmps, setAllEmps] = useState();
+
+//     useEffect(
+//         () => {
+
+//         }
+//         , []);
+
+//     const handleChange = (evt) => {
+//         console.log(evt.target.name);
+//         console.log(evt.target.value);
+//         setEid(evt.target.value);
+//     }
+
+//     const handleAddEmp = (e) => {
+//         console.log(e.target.name);
+//         console.log(e.target.value);
+//         setEmpToBeAdded({
+//             ...empToBeAdded,
+//             [e.target.name]: e.target.value
+//         });
+
+//         setDepartment({
+//             ...department,
+//             [e.target.name]: e.target.value
+//         });
+//     }
+
+//     const submitGetEmpById = (evt) => {
+//         console.log(eid);
+//         evt.preventDefault();
+//         getEmpByIdService(eid)
+//             .then((response) => {
+//                 console.log(response.data);
+//                 setEmp(response.data);
+//             })
+//             .catch((error) => {
+//                 alert(error);
+//                 setEmp(new Employee());
+//             })
+//     }
+
+//     const submitGetAllEmps = (evt) => {
+//         evt.preventDefault();
+//         getAllEmpsService()
+//             .then((response) => {
+//                 setAllEmps(response.data);
+//                 console.log(response.data);
+//                 console.log(allEmps);
+//             })
+//             .catch((error) => {
+//                 alert(error);
+//                 setAllEmps([]);
+//             });
+//     }
+
+//     const submitAddEmp = (evt) => {
+//         evt.preventDefault();
+//         let empTemp = { ...empToBeAdded, department };
+//         addEmpService(empTemp)
+//             .then((response) => {
+//                 console.log(response.data);
+//                 alert(`Employee with eid ${response.data.eid} added successfully.`);
+//             })
+//             .catch(() => {
+//                 setEmpToBeAdded(new Employee());
+//                 empTemp = '';
+//                 alert("Employee could not be added.");
+//             });
+//     }
+
+//     return (
+//         <div className="container">
+//             <p className="display-4 text-primary py-3">EmpData</p>
+//             <hr />
+//             <div className="bg-white shadow shadow-regular mb-3 mt-3 px-3 py-3 pb-3 pt-3 col-4">
+//                 <p className="lead">Add New Employee</p>
+//                 <div className="form form-group" >
+//                     <input
+//                         type="text"
+//                         id="firstName"
+//                         name="firstName"
+//                         className="form-control mb-3 mt-3"
+//                         value={empToBeAdded.firstName}
+//                         onChange={handleAddEmp}
+//                         placeholder="Enter First Name" />
+//                     <input
+//                         type="number"
+//                         id="salary"
+//                         name="salary"
+//                         className="form-control mb-3 mt-3"
+//                         value={empToBeAdded.salary}
+//                         onChange={handleAddEmp}
+//                         placeholder="Enter salary" />
+//                     <input
+//                         type="number"
+//                         id="did"
+//                         name="did"
+//                         className="form-control mb-3 mt-3"
+//                         value={department.did}
+//                         onChange={handleAddEmp}
+//                         placeholder="Enter Department Id" />
+//                     <input
+//                         type="submit"
+//                         className="btn btn-outline-primary form-control mb-3 mt-3"
+//                         value="Add Employee"
+//                         onClick={submitAddEmp}
+//                     />
+//                 </div>
+//             </div>
+//             <div className="bg-white shadow shadow-regular mb-3 mt-3 px-3 py-3 pb-3 pt-3 col-4">
+//                 <p className="lead">Find an Employee</p>
+//                 <div>
+//                     <form className="form form-group">
+//                         <input
+//                             type="number"
+//                             className="form-control mb-3 mt-3"
+//                             id="eid"
+//                             value={eid}
+//                             placeholder="Enter employee id"
+//                             onChange={handleChange}
+//                             autoFocus />
+//                         <input type="submit" className="form-control mb-3 mt-3 btn btn-outline-primary" value="Get Employee" onClick={submitGetEmpById} />
+//                     </form>
+//                 </div>
+//                 {/* this needs explanation  */}
+//                 <div> {(emp.eid) &&
+//                     <div>
+//                         <p className="lead text-primary">Employee Details</p>
+//                         <p> Employee id: {emp.eid} </p>
+//                         <p> First name: {emp.firstName} </p>
+//                         <p> Salary: {emp.salary} </p>
+//                         {/* this needs explanation  */}
+//                         {(emp.department) &&
+//                             <div>
+//                                 <p> Department id: {emp.department.did} </p>
+//                                 <p> Department name: {emp.department.departmentName} </p>
+//                                 <p> City: {emp.department.city}  </p>
+//                             </div>
+//                         }
+//                     </div>
+//                 }
+//                 </div>
+//             </div>
+//             <div className="bg-white shadow shadow-regular mb-3 mt-3 px-3 py-3 pb-3 pt-3 col-8">
+//                 <p className="lead">Get All Employees</p>
+//                 <div className="form form-group" >
+//                     <input
+//                         type="button"
+//                         className="btn btn-outline-primary form-control mb-3 mt-3"
+//                         value="Get All Employees"
+//                         onClick={submitGetAllEmps}
+//                     />
+//                 </div>
+//                 <div>
+//                     {/* this needs explanation  */}
+//                     <div> {(allEmps) &&
+//                         <div>
+//                             <p className="text-primary text-center font-weight-bold lead">List of All Employees</p>
+//                             {
+//                                 <table className="table">
+//                                     <thead>
+//                                         <tr>
+//                                             <th>Emp Id</th>
+//                                             <th>First Name</th>
+//                                             <th>Salary</th>
+//                                             <th>Dept Id</th>
+//                                             <th>Dept Name</th>
+//                                             <th>City</th>
+//                                         </tr>
+//                                     </thead>
+//                                     {allEmps.map((e =>
+//                                         <tbody>
+//                                             <tr>
+//                                                 <td>{e.eid}</td>
+//                                                 <td>{e.firstName}</td>
+//                                                 <td>{e.salary}</td>
+//                                                 {(e.department) &&
+//                                                     <>
+//                                                         <td>{e.department.did}</td>
+//                                                         <td>{e.department.departmentName}</td>
+//                                                         <td>{e.department.city}</td>
+//                                                     </>
+//                                                 }
+//                                             </tr>
+//                                         </tbody>
+//                                     ))}
+//                                 </table>
+//                             }
+//                         </div>
+//                     }
+//                     </div>
+//                 </div>
+//             </div>
+//         </div >
+//     );
+// }
+
+// export default EmpData;
 
 
 
