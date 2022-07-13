@@ -8,8 +8,10 @@
 
 
 import { configureStore } from "@reduxjs/toolkit";
+// import { empReducer } from './EmpSlice';
 import empReducer from './EmpSlice';
 
+console.log('store initilized');
 const store = configureStore({
     reducer: {
         emp: empReducer

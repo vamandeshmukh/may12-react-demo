@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Department from "../models/Department";
 import Employee from "../models/Employee";
+import { getEmpById } from "../redux/EmpSlice";
 import { getEmpByIdService, getAllEmpsService, addEmpService } from "../services/EmployeeService";
 
 const EmpData = () => {
@@ -10,9 +11,14 @@ const EmpData = () => {
     const [emp, setEmp] = useState(new Employee());
     const [empToBeAdded, setEmpToBeAdded] = useState(new Employee());
     const [department, setDepartment] = useState(new Department());
-    const [allEmps, setAllEmps] = useState();
+    const [allEmps, setAllEmps] = useState([]);
 
+    // fetch data from store 
     const empDataFromStore = useSelector((state) => { return state.emp.empObj });
+
+    // send data to store - steps - 1, 2
+    // step 1
+    const dispatch = useDispatch();
 
     useEffect(
         () => {
@@ -47,10 +53,13 @@ const EmpData = () => {
             .then((response) => {
                 console.log(response.data);
                 setEmp(response.data);
+                dispatch(getEmpById(response.data)); // step 2 
+                setEid('');
             })
             .catch((error) => {
                 alert(error);
                 setEmp(new Employee());
+                setEid('');
             })
     }
 
@@ -156,7 +165,8 @@ const EmpData = () => {
                 }
                 </div>
                 <div>
-                    <p>emp Data From Store</p>
+                    <hr />
+                    <p className="lead">Emp Data from Store</p>
                     <p>{empDataFromStore.eid} {empDataFromStore.firstName} {empDataFromStore.salary} </p>
                 </div>
             </div>

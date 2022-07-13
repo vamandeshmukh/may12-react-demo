@@ -4,7 +4,6 @@ import Employee from '../models/Employee';
 
 const EmpSlice = createSlice({
     name: 'emp',
-
     initialState: {
         // empObj: new Employee(),
         empObj: { eid: 98765, firstName: 'Zxywv', salary: 9876543 },
