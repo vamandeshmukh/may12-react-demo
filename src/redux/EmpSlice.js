@@ -6,7 +6,7 @@ const EmpSlice = createSlice({
     name: 'emp',
     initialState: {
         // empObj: new Employee(),
-        empObj: { eid: 98765, firstName: 'Zxywv', salary: 9876543 },
+        empObj: { eid: 'initial value', firstName: 'initial value', salary: 'initial value' },
         empList: []
     },
 

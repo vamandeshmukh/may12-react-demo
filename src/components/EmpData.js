@@ -146,10 +146,9 @@ const EmpData = () => {
                         <input type="submit" className="form-control mb-3 mt-3 btn btn-outline-primary" value="Get Employee" onClick={submitGetEmpById} />
                     </form>
                 </div>
-                {/* this needs explanation  */}
                 <div> {(emp.eid) &&
                     <div>
-                        <p className="lead text-primary">Employee Details</p>
+                        <p className="lead text-primary">Employee Details from State Object</p>
                         <p> Employee id: {emp.eid} </p>
                         <p> First name: {emp.firstName} </p>
                         <p> Salary: {emp.salary} </p>
@@ -164,11 +163,23 @@ const EmpData = () => {
                     </div>
                 }
                 </div>
-                <div>
-                    <hr />
-                    <p className="lead">Emp Data from Store</p>
-                    <p>{empDataFromStore.eid} {empDataFromStore.firstName} {empDataFromStore.salary} </p>
+                <div> {(empDataFromStore.eid) &&
+                    <div>
+                        <p className="lead text-primary">Employee Details from Store</p>
+                        <p> Employee id: {empDataFromStore.eid} </p>
+                        <p> First name: {empDataFromStore.firstName} </p>
+                        <p> Salary: {empDataFromStore.salary} </p>
+                        {(empDataFromStore.department) &&
+                            <div>
+                                <p> Department id: {empDataFromStore.department.did} </p>
+                                <p> Department name: {empDataFromStore.department.departmentName} </p>
+                                <p> City: {empDataFromStore.department.city}  </p>
+                            </div>
+                        }
+                    </div>
+                }
                 </div>
+
             </div>
             <div className="bg-white shadow shadow-regular mb-3 mt-3 px-3 py-3 pb-3 pt-3 col-8">
                 <p className="lead">Get All Employees</p>
