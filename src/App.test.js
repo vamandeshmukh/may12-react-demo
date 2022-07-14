@@ -30,15 +30,15 @@ test('EmpData component renders properly.', () => {
   expect(dataToTest).toBeInTheDocument();
 });
 
-// test('EmpData component renders properly.', () => {
-//   render(
-//     <Provider store={store}>
-//       <EmpData />
-//     </Provider>
-//   );
-//   const dataToTest = screen.getByText('Add New Customer');
-//   expect(dataToTest).not.toBeInTheDocument();
-// });
+test('EmpData component renders properly.', () => {
+  render(
+    <Provider store={store}>
+      <EmpData />
+    </Provider>
+  );
+  const dataToTest = screen.getByText('Add New Employee');
+  expect(dataToTest).toBeVisible();
+});
 
 
 // test('renders learn react link', () => {

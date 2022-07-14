@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Logout from './components/Logout';
 import Parent from './components/Parent';
 import Register from './components/Register';
+import UserProfile from './components/UserProfile';
 
 const Routes = () => {
 
@@ -25,6 +26,7 @@ const Routes = () => {
                                     <Route path='/emp'> <EmpData />  </Route>
                                     <Route path='/logout'> <Logout />  </Route>
                                     <Route path='/parent'> <Parent />  </Route>
+                                    <Route path='/profile'> <UserProfile />  </Route>
                                     <Route path='/'> <Home />  </Route>
                                 </Switch>
                             </div>
