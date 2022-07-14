@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import AppUser from '../models/AppUser';
 
 const AppUserSlice = createSlice({
-
     name: 'appUser',
 
     initialState: {

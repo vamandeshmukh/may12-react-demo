@@ -2,13 +2,14 @@ import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import AppUser from '../models/AppUser';
 import { loginUser, logoutUser } from '../redux/AppUserSlice';
 const Login = () => {
 
     const [appUser, setAppUser] = useState(new AppUser());
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const handleAppUser = (event) => {
         console.log(event.target.name);
@@ -28,6 +29,7 @@ const Login = () => {
             .then((response) => {
                 dispatch(loginUser(response.data));
                 alert(`Login successful for ${response.data.userName}!`);
+                history.push("/");
             })
             .catch((error) => {
                 dispatch(logoutUser());

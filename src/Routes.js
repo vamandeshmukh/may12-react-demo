@@ -15,7 +15,6 @@ const Routes = () => {
 
     return (
         <div>
-
             <div>
                 {loginStatus &&
                     <div>

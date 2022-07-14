@@ -1,12 +1,13 @@
 import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import AppUser from '../models/AppUser';
 
 const Register = () => {
 
     const [appUser, setAppUser] = useState(new AppUser());
+    const history = useHistory();
 
     const handleAppUser = (event) => {
         console.log(event.target.name);
@@ -21,7 +22,8 @@ const Register = () => {
         console.log(appUser);
         axios.post('http://localhost:9999/user/register', appUser)
             .then((response) => {
-                alert(`Registration successful for ${response.data.userName}!`);
+                alert(`Registration successful for ${response.data.userName}! Please login now.`);
+                history.push("login");
             })
             .catch((error) => {
                 alert(`Something is wrong ${error.message}!`);
