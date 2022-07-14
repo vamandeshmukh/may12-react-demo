@@ -14,7 +14,7 @@ const EmpData = () => {
     const [allEmps, setAllEmps] = useState([]);
 
     // fetch data from store 
-    const empDataFromStore = useSelector((state) => { return state.emp.empObj });
+    const empDataFromStore = useSelector((store) => { return store.emp.empObj; });
 
     // send data to store - steps - 1, 2
     // step 1
@@ -146,13 +146,14 @@ const EmpData = () => {
                         <input type="submit" className="form-control mb-3 mt-3 btn btn-outline-primary" value="Get Employee" onClick={submitGetEmpById} />
                     </form>
                 </div>
+
+
                 <div> {(emp.eid) &&
                     <div>
                         <p className="lead text-primary">Employee Details from State Object</p>
                         <p> Employee id: {emp.eid} </p>
                         <p> First name: {emp.firstName} </p>
                         <p> Salary: {emp.salary} </p>
-                        {/* this needs explanation  */}
                         {(emp.department) &&
                             <div>
                                 <p> Department id: {emp.department.did} </p>

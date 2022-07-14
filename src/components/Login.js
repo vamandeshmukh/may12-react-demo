@@ -1,12 +1,14 @@
 import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import AppUser from '../models/AppUser';
-
+import { loginUser, logoutUser } from '../redux/AppUserSlice';
 const Login = () => {
 
     const [appUser, setAppUser] = useState(new AppUser());
+    const dispatch = useDispatch();
 
     const handleAppUser = (event) => {
         console.log(event.target.name);
@@ -24,9 +26,11 @@ const Login = () => {
         console.log(appUser);
         axios.post('http://localhost:9999/user/login', appUser)
             .then((response) => {
+                dispatch(loginUser(response.data));
                 alert(`Login successful for ${response.data.userName}!`);
             })
             .catch((error) => {
+                dispatch(logoutUser());
                 alert(`Something is wrong ${error.message}!`);
             });
         event.preventDefault();

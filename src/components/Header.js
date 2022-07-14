@@ -1,7 +1,12 @@
-// header with bootstrap 
+
+// header with bootstrap
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
+
+    const loginStatus = useSelector((store) => { return store.appUser.isLoggedIn; });
+
     return (
         <div className=' bg-dark'>
             <div className=' container-fluid'>
@@ -14,11 +19,11 @@ const Header = () => {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div className=" navbar-nav ml-auto">
-                            <Link className="nav-link" to='/emp'>Emp</Link>
-                            <Link className="nav-link" to='/parent'>Parent</Link>
-                            <Link className="nav-link" to='/register'>Register</Link>
-                            <Link className="nav-link" to='/login'>Login</Link>
-                            <Link className="nav-link" to='/logout'>Logout</Link>
+                            <div> {loginStatus && <Link className="nav-link" to='/emp'>Emp</Link>} </div>
+                            <div> {loginStatus && <Link className="nav-link" to='/parent'>Parent</Link>} </div>
+                            <div> {!loginStatus && <Link className="nav-link" to='/register'>Register</Link>} </div>
+                            <div> {!loginStatus && <Link className="nav-link" to='/login'>Login</Link>} </div>
+                            <div> {loginStatus && <Link className="nav-link" to='/logout'>Logout</Link>} </div>
                         </div>
                     </div>
                 </nav>

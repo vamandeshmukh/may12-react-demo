@@ -10,11 +10,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 // import { empReducer } from './EmpSlice';
 import empReducer from './EmpSlice';
+import appUserReducer from './AppUserSlice';
 
 console.log('store initilized');
 const store = configureStore({
     reducer: {
-        emp: empReducer
+        emp: empReducer,
+        appUser: appUserReducer
         // create more reducers for other components 
     }
 });

@@ -1,3 +1,5 @@
+
+import { useSelector } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import EmpData from './components/EmpData';
 import Header from './components/Header';
@@ -9,22 +11,42 @@ import Register from './components/Register';
 
 const Routes = () => {
 
+    const loginStatus = useSelector((store) => { return store.appUser.isLoggedIn; });
+
     return (
         <div>
+
             <div>
-                <BrowserRouter>
-                    <Header />
-                    <div style={{ minHeight: "92vh" }} >
-                        <Switch>
-                            <Route path='/emp'> <EmpData />  </Route>
-                            <Route path='/login'> <Login />  </Route>
-                            <Route path='/logout'> <Logout />  </Route>
-                            <Route path='/parent'> <Parent />  </Route>
-                            <Route path='/register'> <Register />  </Route>
-                            <Route path='/'> <Home />  </Route>
-                        </Switch>
-                    </div>
-                </BrowserRouter>
+                {loginStatus &&
+                    <div>
+                        <BrowserRouter>
+                            <Header />
+                            <div style={{ minHeight: "92vh" }} >
+                                <Switch>
+                                    <Route path='/emp'> <EmpData />  </Route>
+                                    <Route path='/logout'> <Logout />  </Route>
+                                    <Route path='/parent'> <Parent />  </Route>
+                                    <Route path='/'> <Home />  </Route>
+                                </Switch>
+                            </div>
+                        </BrowserRouter>
+                    </div>}
+
+            </div>
+            <div>
+                {!loginStatus &&
+                    <div>
+                        <BrowserRouter>
+                            <Header />
+                            <div style={{ minHeight: "92vh" }} >
+                                <Switch>
+                                    <Route path='/login'> <Login />  </Route>
+                                    <Route path='/register'> <Register />  </Route>
+                                    <Route path='/'> <Home />  </Route>
+                                </Switch>
+                            </div>
+                        </BrowserRouter>
+                    </div>}
             </div>
         </div >
     );
