@@ -15,12 +15,25 @@ const Logout = () => {
         history.push("/");
     }
     return (
-        <div className="container" >
-            <p className="display-4 text-primary py-3">Logout</p>
-            <hr />
-            <div className="col-3 mt-3 py-3 shadow bg-white" >
+        <div className="modal fade" id="logoutModal">
+            <div className="modal-dialog">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">Logout!</h5>
+                        <button type="button" className="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
+                    </div>
+                    <div className="modal-body">
+                        Are you sure to logout?
+                    </div>
+                    <div className="modal-footer">
+                        <button type="button" className="btn btn-outline-secondary" data-dismiss="modal">No</button>
+                        <button type="button" className="btn btn-outline-primary" data-dismiss="modal" onClick={submitLogout}>Yes</button>
+                    </div>
+                </div>
             </div>
-        </div >
+        </div>
     )
 
 }

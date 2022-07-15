@@ -8,9 +8,6 @@ import Logout from './Logout';
 const Header = () => {
 
     const loginStatus = useSelector((store) => { return store.appUser.isLoggedIn; });
-    const [shouldLogout, setShouldLogout] = useState(false);
-
-
 
     return (
         <div className=' bg-dark'>
@@ -37,7 +34,13 @@ const Header = () => {
                                         <Link className="dropdown-item" to="/profile">View</Link>
                                         <Link className="dropdown-item" to="/update">Update</Link>
                                         <div className="dropdown-divider"></div>
-                                        <button className="dropdown-item" onClick={() => {setShouldLogout(true)}}>Logout</button>
+                                        <button
+                                            type="button"
+                                            className="dropdown-item"
+                                            data-toggle="modal"
+                                            data-target="#logoutModal">
+                                            Logout
+                                        </button>
                                     </div>
                                 </div>
                             }
@@ -46,7 +49,7 @@ const Header = () => {
                     </div>
                 </nav>
             </div>
-            <div> {shouldLogout && <Logout />} </div>
+            <Logout />
         </div >
     );
 }
