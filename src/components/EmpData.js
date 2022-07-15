@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Department from "../models/Department";
 import Employee from "../models/Employee";
-import { getEmpById } from "../redux/EmpSlice";
+import { fetchEmpById } from "../redux/EmpSlice";
 import { getEmpByIdService, getAllEmpsService, addEmpService } from "../services/EmployeeService";
+
+
 
 const EmpData = () => {
 
@@ -53,7 +55,7 @@ const EmpData = () => {
             .then((response) => {
                 console.log(response.data);
                 setEmp(response.data);
-                dispatch(getEmpById(response.data)); // step 2 
+                dispatch(fetchEmpById(response.data)); // step 2 
                 setEid('');
             })
             .catch((error) => {

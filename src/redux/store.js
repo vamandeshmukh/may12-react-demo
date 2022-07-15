@@ -6,9 +6,7 @@
 // 4. import methods from those slices into components 
 // 5. exchage data using those methods  
 
-
 import { configureStore } from "@reduxjs/toolkit";
-// import { empReducer } from './EmpSlice';
 import empReducer from './EmpSlice';
 import appUserReducer from './AppUserSlice';
 

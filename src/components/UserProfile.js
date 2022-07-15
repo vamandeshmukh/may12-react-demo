@@ -16,6 +16,7 @@ const UserProfile = () => {
                         <p>UserName: {currentUser.userName}</p>
                         <p>Role: {currentUser.role}</p>
                         <p>Avatar: <i className="bi bi-person-circle lead"></i></p>
+                        <p><i className="bi bi-plus-circle-fill"></i></p>
                     </div>
                 }
             </div>

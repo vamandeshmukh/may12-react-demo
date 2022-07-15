@@ -13,8 +13,6 @@ const Login = () => {
     const history = useHistory();
 
     const handleAppUser = (event) => {
-        console.log(event.target.name);
-        console.log(event.target.value);
         setAppUser({
             ...appUser,
             [event.target.name]: event.target.value
@@ -65,8 +63,8 @@ const Login = () => {
                             onChange={handleAppUser}
                             required
                         />
-                        <div class="form-group">
-                            <select class="form-control mb-3" name="role" id="role" onChange={handleAppUser}>
+                        <div className="form-group">
+                            <select className="form-control mb-3" name="role" id="role" onChange={handleAppUser}>
                                 <option value="Role">Select a role</option>
                                 <option value="ADMIN">ADMIN</option>
                                 <option value="EMPLOYEE">EMPLOYEE</option>
@@ -153,8 +151,8 @@ export default Login;
 //                             onChange={handleAppUser}
 //                             required
 //                         />
-//                         <div class="form-group">
-//                             <select class="form-control mb-3" name="role" id="role" onChange={handleAppUser}>
+//                         <div className="form-group">
+//                             <select className="form-control mb-3" name="role" id="role" onChange={handleAppUser}>
 //                                 <option value="Role">Select a role</option>
 //                                 <option value="ADMIN">ADMIN</option>
 //                                 <option value="EMPLOYEE">EMPLOYEE</option>

@@ -64,8 +64,8 @@ const UpdateUser = () => {
                             onChange={handleAppUser}
                             required
                         />
-                        <div class="form-group">
-                            <select class="form-control mb-3" name="role" id="role" onChange={handleAppUser}>
+                        <div className="form-group">
+                            <select className="form-control mb-3" name="role" id="role" onChange={handleAppUser}>
                                 <option value="Role">Select a role</option>
                                 <option value="ADMIN">ADMIN</option>
                                 <option value="EMPLOYEE">EMPLOYEE</option>
