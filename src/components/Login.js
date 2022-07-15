@@ -1,10 +1,11 @@
-import axios from 'axios';
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import AppUser from '../models/AppUser';
 import { loginUser, logoutUser } from '../redux/AppUserSlice';
+import { loginService } from '../services/AppUserService';
+
 const Login = () => {
 
     const [appUser, setAppUser] = useState(new AppUser());
@@ -20,12 +21,9 @@ const Login = () => {
         });
     };
 
-    // see axios APIs here - https://www.npmjs.com/package/axios 
-
-
     const submitAppUser = (event) => {
         console.log(appUser);
-        axios.post('http://localhost:9999/user/login', appUser)
+        loginService(appUser)
             .then((response) => {
                 dispatch(loginUser(response.data));
                 alert(`Login successful for ${response.data.userName}!`);
@@ -33,7 +31,8 @@ const Login = () => {
             })
             .catch((error) => {
                 dispatch(logoutUser());
-                alert(`Something is wrong ${error.message}!`);
+                console.log(error.message);
+                // alert(`Something is wrong ${error.response}!`);
             });
         event.preventDefault();
     }
@@ -80,7 +79,6 @@ const Login = () => {
                             name="submit"
                             className="form-control btn btn-outline-primary"
                             value="Login"
-                            onClick={submitAppUser}
                         />
                     </div>
                 </form>

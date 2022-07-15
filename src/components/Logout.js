@@ -1,62 +1,41 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { logoutUser } from "../redux/AppUserSlice";
+import { logoutService } from "../services/AppUserService";
 
 const Logout = () => {
 
     const history = useHistory();
     const dispatch = useDispatch();
+    const currentUser = useSelector(store => store.appUser.currentUser);
 
     const submitLogout = () => {
+        logoutService(currentUser);
         dispatch(logoutUser());
         history.push("/");
     }
     return (
-        <div>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-                Launch static backdrop modal
-            </button>
-
-            <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            Are you sure to logout?
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" onClick={submitLogout}>Yes</button>
-                        </div>
+        <div className="container" >
+            <p className="display-4 text-primary py-3">Logout</p>
+            <hr />
+            <div className="col-3 mt-3 py-3 shadow bg-white" >
+                <h1 className="lead text-primary pb-2">Are you sure to logout?</h1>
+                <form className="form form-group form-dark " onSubmit={submitLogout}>
+                    <div>
+                        <input
+                            type="submit"
+                            id="submit"
+                            name="submit"
+                            className="form-control btn btn-outline-primary"
+                            value="Logout"
+                        />
                     </div>
-                </div>
+                </form>
             </div>
-        </div>
-    );
+        </div >
+    )
 
 }
 export default Logout;
 
-
-
-
-// import { useDispatch } from "react-redux";
-// import { useHistory } from "react-router";
-// import { logoutUser } from "../redux/AppUserSlice";
-// const Logout = () => {
-
-//     const history = useHistory();
-//     const dispatch = useDispatch();
-
-//     dispatch(logoutUser());
-//     alert("Logged out successfully...");
-//     history.push("/");
-
-// }
-// export default Logout;
 

@@ -2,10 +2,16 @@
 // header with bootstrap
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Logout from './Logout';
 
 const Header = () => {
 
     const loginStatus = useSelector((store) => { return store.appUser.isLoggedIn; });
+    const logoutFun = () => {
+        alert(`Logging out...`);
+        Logout();
+
+    };
 
     return (
         <div className=' bg-dark'>
@@ -23,14 +29,13 @@ const Header = () => {
                             <div> {loginStatus && <Link className="nav-link" to='/parent'>Parent</Link>} </div>
                             <div> {!loginStatus && <Link className="nav-link" to='/register'>Register</Link>} </div>
                             <div> {!loginStatus && <Link className="nav-link" to='/login'>Login</Link>} </div>
-                            <div> {loginStatus && <Link className="nav-link" to='/logout'>Logout</Link>} </div>
                             <div> {loginStatus &&
                                 <div class="nav-item dropdown navbar-dark">
                                     <Link class="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown">
                                         Profile
                                     </Link>
                                     <div class="dropdown-menu">
-                                        <Link class="dropdown-item" to="/profile">Profile</Link>
+                                        <Link class="dropdown-item" to="/profile">View</Link>
                                         <Link class="dropdown-item" to="/update">Update</Link>
                                         <div class="dropdown-divider"></div>
                                         <Link class="dropdown-item" to="/logout">Logout</Link>
